@@ -340,13 +340,14 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Преимущества строительства из бруса</h2>
+            <p className="text-lg text-muted-foreground">Почему деревянный брус — лучший выбор для вашего дома</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: 'Leaf', title: 'Экологичность', desc: 'Натуральные материалы без химии' },
-              { icon: 'Clock', title: 'Быстрота', desc: 'Строительство за 2-3 месяца' },
-              { icon: 'Shield', title: 'Долговечность', desc: 'Служит более 50 лет' },
-              { icon: 'Zap', title: 'Энергоэффективность', desc: 'Низкие затраты на отопление' }
+              { icon: 'Leaf', title: 'Экологичность', desc: 'Натуральные материалы без химии. Дерево "дышит" и создаёт здоровый микроклимат' },
+              { icon: 'Thermometer', title: 'Теплоизоляция', desc: 'Брус держит тепло в 3 раза лучше кирпича. Экономия на отоплении до 40%' },
+              { icon: 'Shield', title: 'Долговечность', desc: 'При правильной обработке служит более 50 лет без потери качества' },
+              { icon: 'Clock', title: 'Скорость', desc: 'Строительство за 2-3 месяца. Можно заселяться сразу после завершения' }
             ].map((advantage, idx) => (
               <Card key={idx} className="text-center hover-scale cursor-pointer border-2 hover:border-primary transition-all">
                 <CardHeader>
@@ -360,6 +361,124 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 gradient-secondary opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Почему выбирают нас</h2>
+            <p className="text-lg text-muted-foreground">Более 12 лет строим дома мечты для наших клиентов</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Card className="border-2 border-border hover:border-secondary transition-all hover-scale">
+              <CardHeader className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full gradient-secondary flex items-center justify-center">
+                  <Icon name="Award" size={40} className="text-white" />
+                </div>
+                <CardTitle className="text-2xl">12+ лет опыта</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Построили более 300 домов и бань по всей России. Знаем все тонкости деревянного строительства.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-border hover:border-secondary transition-all hover-scale">
+              <CardHeader className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full gradient-secondary flex items-center justify-center">
+                  <Icon name="CheckCircle" size={40} className="text-white" />
+                </div>
+                <CardTitle className="text-2xl">Гарантия качества</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  5 лет гарантии на все работы. Используем только сертифицированные материалы премиум класса.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-border hover:border-secondary transition-all hover-scale">
+              <CardHeader className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full gradient-secondary flex items-center justify-center">
+                  <Icon name="Calendar" size={40} className="text-white" />
+                </div>
+                <CardTitle className="text-2xl">Соблюдаем сроки</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Чёткий график работ с поэтапной оплатой. Построим дом в срок или вернём деньги по договору.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Отзывы наших клиентов</h2>
+            <p className="text-lg text-muted-foreground">Что говорят о нас те, кто уже построил свой дом</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                name: 'Алексей Петров',
+                location: 'Московская область',
+                text: 'Построили дом за 3 месяца точно в срок. Качество работы на высоте, бригада профессиональная. Живём уже год — очень довольны!',
+                rating: 5,
+                project: 'Дом "Северный"'
+              },
+              {
+                name: 'Мария Соколова',
+                location: 'Ленинградская область',
+                text: 'Заказывали баню под ключ. Ребята сделали всё идеально, даже больше чем обещали. Теперь каждые выходные паримся с семьёй!',
+                rating: 5,
+                project: 'Баня "Русская традиция"'
+              },
+              {
+                name: 'Дмитрий Волков',
+                location: 'Краснодарский край',
+                text: 'Отличная компания! Помогли с выбором проекта, провели все коммуникации. Цена честная, без скрытых платежей. Рекомендую!',
+                rating: 5,
+                project: 'Дом "Скандинавия"'
+              }
+            ].map((review, idx) => (
+              <Card key={idx} className="hover-scale border-2 hover:border-primary transition-all">
+                <CardHeader>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon name="User" size={24} className="text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">{review.name}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{review.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-1">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Icon key={i} name="Star" size={16} className="text-primary fill-primary" />
+                    ))}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-3">{review.text}</p>
+                  <Badge variant="secondary" className="text-xs">
+                    {review.project}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button size="lg" variant="outline" className="border-2 border-primary">
+              <Icon name="MessageSquare" size={20} className="mr-2" />
+              Оставить отзыв
+            </Button>
           </div>
         </div>
       </section>

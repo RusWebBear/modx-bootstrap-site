@@ -1,0 +1,46 @@
+<div class="col-lg-4 col-md-6">
+    <div class="card h-100 border-2 hover-scale [[+tv.promo_is_hot:is=`1`:then=`border-primary shadow-lg`]]">
+        <div class="position-relative overflow-hidden" style="height: 200px;">
+            <img src="[[+tv.promo_image:notempty=`[[+tv.promo_image]]`:default=`[[++assets_url]]images/placeholder-promo.jpg`]]" 
+                 class="card-img-top h-100 object-fit-cover hover-zoom" 
+                 alt="[[+pagetitle]]">
+            <div class="position-absolute top-0 end-0 m-3 d-flex gap-2">
+                [[+tv.promo_is_hot:is=`1`:then=`
+                    <span class="badge gradient-primary">
+                        <i class="bi bi-fire me-1"></i>Горячее
+                    </span>
+                `]]
+                <span class="badge bg-white text-dark">
+                    [[+tv.promo_discount]]
+                </span>
+            </div>
+        </div>
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-3">[[+pagetitle]]</h5>
+            <p class="card-text text-muted mb-3">
+                [[+introtext:ellipsis=`120`]]
+            </p>
+            
+            <div class="d-flex align-items-center gap-2 text-muted small mb-3">
+                <i class="bi bi-calendar-event text-primary"></i>
+                <span>Действует до: <strong>[[+tv.promo_valid_until]]</strong></span>
+            </div>
+            
+            <div class="mb-3">
+                <p class="small fw-semibold mb-2">Условия акции:</p>
+                <ul class="small text-muted ps-3 mb-0">
+                    [[+tv.promo_conditions:split=`||`:then=`
+                        <li class="mb-1">
+                            <i class="bi bi-check-circle text-success me-1"></i>
+                            [[+value]]
+                        </li>
+                    `]]
+                </ul>
+            </div>
+            
+            <a href="[[~[[+id]]]]" class="btn btn-primary gradient-primary mt-auto w-100">
+                <i class="bi bi-gift me-2"></i>Воспользоваться акцией
+            </a>
+        </div>
+    </div>
+</div>

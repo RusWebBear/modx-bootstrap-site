@@ -1,0 +1,38 @@
+<div class="col-lg-4 col-md-6">
+    <div class="card h-100 border-2 hover-scale blog-card" 
+         data-category="[[+tv.blog_category]]" 
+         data-title="[[+pagetitle]]"
+         data-excerpt="[[+tv.blog_excerpt]]">
+        <div class="position-relative overflow-hidden" style="height: 200px;">
+            <img src="[[+tv.blog_image:notempty=`[[+tv.blog_image]]`:default=`[[++assets_url]]images/placeholder-blog.jpg`]]" 
+                 class="card-img-top h-100 object-fit-cover hover-zoom" 
+                 alt="[[+pagetitle]]">
+            <span class="badge gradient-secondary position-absolute top-0 end-0 m-3">
+                [[+tv.blog_category]]
+            </span>
+        </div>
+        <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center gap-2 text-muted small mb-2">
+                <i class="bi bi-calendar3"></i>
+                <span>[[+publishedon:strtotime:date=`%d.%m.%Y`]]</span>
+                <span>•</span>
+                <i class="bi bi-clock"></i>
+                <span>[[+tv.blog_read_time:default=`5 мин`]]</span>
+            </div>
+            <h5 class="card-title mb-3">
+                <a href="[[~[[+id]]]]" class="text-decoration-none text-dark stretched-link">
+                    [[+pagetitle]]
+                </a>
+            </h5>
+            <p class="card-text text-muted flex-grow-1">
+                [[+tv.blog_excerpt:ellipsis=`150`]]
+            </p>
+            <div class="d-flex align-items-center gap-2 mt-3">
+                <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-person text-primary"></i>
+                </div>
+                <span class="small text-muted">[[+tv.blog_author:default=`Редакция`]]</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[*pagetitle]] - [[++site_name]]</title>
+    <meta name="description" content="[[*description]]">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="[[++assets_url]]css/custom.css" rel="stylesheet">
+</head>
+<body>
+    [[$header]]
+
+    <!-- Hero Section -->
+    <section class="py-5 gradient-primary-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Отзывы наших клиентов</h1>
+                    <p class="lead text-muted mb-5">
+                        Более [[+total_reviews:default=`34`]] довольных клиентов доверили нам строительство своего дома мечты
+                    </p>
+                    
+                    <div class="d-flex flex-wrap gap-4 justify-content-center">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle gradient-primary d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
+                                <span class="text-white fw-bold fs-5">5.0</span>
+                            </div>
+                            <div class="text-start">
+                                <div class="d-flex gap-1 mb-1">
+                                    <i class="bi bi-star-fill text-primary"></i>
+                                    <i class="bi bi-star-fill text-primary"></i>
+                                    <i class="bi bi-star-fill text-primary"></i>
+                                    <i class="bi bi-star-fill text-primary"></i>
+                                    <i class="bi bi-star-fill text-primary"></i>
+                                </div>
+                                <p class="small text-muted mb-0">Средняя оценка</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-success bg-opacity-25 d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
+                                <i class="bi bi-house-fill text-success fs-4"></i>
+                            </div>
+                            <div class="text-start">
+                                <p class="fw-bold fs-5 mb-0">[[+houses_built:default=`24`]]</p>
+                                <p class="small text-muted mb-0">Домов построено</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-warning bg-opacity-25 d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
+                                <i class="bi bi-droplet-fill text-warning fs-4"></i>
+                            </div>
+                            <div class="text-start">
+                                <p class="fw-bold fs-5 mb-0">[[+banyas_built:default=`10`]]</p>
+                                <p class="small text-muted mb-0">Бань построено</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <ul class="nav nav-pills justify-content-center mb-5" id="reviewsTabs">
+                <li class="nav-item">
+                    <button class="nav-link active px-4" data-filter="all" onclick="filterReviews('all')">
+                        Все ([[+total_reviews:default=`34`]])
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link px-4" data-filter="house" onclick="filterReviews('house')">
+                        Дома ([[+houses_built:default=`24`]])
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link px-4" data-filter="banya" onclick="filterReviews('banya')">
+                        Бани ([[+banyas_built:default=`10`]])
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Reviews Grid -->
+            <div class="row g-4" id="reviewsGrid">
+                [[!pdoResources?
+                    &parents=`[[*id]]`
+                    &tpl=`reviewCard`
+                    &limit=`12`
+                    &sortby=`publishedon`
+                    &sortdir=`DESC`
+                    &includeTVs=`review_rating,review_location,review_project,review_project_type,review_verified`
+                ]]
+            </div>
+        </div>
+    </section>
+
+    <!-- Write Review Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card border-primary border-2 shadow-lg">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-chat-square-text display-3 text-primary mb-3"></i>
+                                <h3 class="h2 mb-2">Оставьте свой отзыв</h3>
+                                <p class="text-muted">Ваше мнение очень важно для нас и поможет другим клиентам</p>
+                            </div>
+                            
+                            [[!FormIt?
+                                &hooks=`spam,email,redirect`
+                                &emailTpl=`reviewEmailTpl`
+                                &emailTo=`[[++emailsender]]`
+                                &emailSubject=`Новый отзыв с сайта`
+                                &redirectTo=`[[*id]]`
+                                &validate=`name:required,email:email:required,review_text:required,rating:required`
+                            ]]
+                            
+                            <form id="reviewForm" method="post">
+                                <input type="hidden" name="nospam" value="">
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Ваше имя *</label>
+                                    <input type="text" name="name" class="form-control form-control-lg" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Email *</label>
+                                    <input type="email" name="email" class="form-control form-control-lg" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Телефон</label>
+                                    <input type="tel" name="phone" class="form-control form-control-lg phone-mask">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Населённый пункт</label>
+                                    <input type="text" name="location" class="form-control form-control-lg" placeholder="Например: Московская область, Истра">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Ваша оценка *</label>
+                                    <div class="rating-input d-flex gap-2 fs-3" id="ratingInput">
+                                        <i class="bi bi-star rating-star" data-rating="1"></i>
+                                        <i class="bi bi-star rating-star" data-rating="2"></i>
+                                        <i class="bi bi-star rating-star" data-rating="3"></i>
+                                        <i class="bi bi-star rating-star" data-rating="4"></i>
+                                        <i class="bi bi-star rating-star" data-rating="5"></i>
+                                    </div>
+                                    <input type="hidden" name="rating" id="ratingValue" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Проект</label>
+                                    <select name="project" class="form-select form-select-lg">
+                                        <option value="">Выберите проект</option>
+                                        <option value="Дом Северный">Дом "Северный"</option>
+                                        <option value="Дом Скандинавия">Дом "Скандинавия"</option>
+                                        <option value="Дом Семейный">Дом "Семейный"</option>
+                                        <option value="Баня Русская традиция">Баня "Русская традиция"</option>
+                                        <option value="Баня Премиум">Баня "Премиум"</option>
+                                        <option value="Баня Компактная">Баня "Компактная"</option>
+                                        <option value="Индивидуальный проект">Индивидуальный проект</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Ваш отзыв *</label>
+                                    <textarea name="review_text" class="form-control" rows="6" placeholder="Расскажите о вашем опыте работы с нами..." required></textarea>
+                                </div>
+                                
+                                <div class="form-check mb-4">
+                                    <input type="checkbox" name="consent" class="form-check-input" id="consent" required>
+                                    <label class="form-check-label" for="consent">
+                                        Согласен на обработку персональных данных
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-lg w-100 gradient-primary">
+                                    <i class="bi bi-send me-2"></i>Отправить отзыв
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Indicators -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-shield-check display-4 text-success mb-3"></i>
+                            <h4 class="h5 mb-2">Проверенные отзывы</h4>
+                            <p class="text-muted mb-0">Мы публикуем только отзывы от реальных клиентов с подтверждением</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-camera display-4 text-primary mb-3"></i>
+                            <h4 class="h5 mb-2">Фото объектов</h4>
+                            <p class="text-muted mb-0">Многие отзывы сопровождаются фотографиями построенных домов и бань</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-star-fill display-4 text-warning mb-3"></i>
+                            <h4 class="h5 mb-2">Высокий рейтинг</h4>
+                            <p class="text-muted mb-0">Средняя оценка 5.0 из 5 — результат нашей ответственной работы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    [[$footer]]
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="[[++assets_url]]js/custom.js"></script>
+    
+    <script>
+    // Reviews filtering
+    function filterReviews(type) {
+        const cards = document.querySelectorAll('.review-card');
+        const tabs = document.querySelectorAll('#reviewsTabs .nav-link');
+        
+        // Update active tab
+        tabs.forEach(tab => {
+            if (tab.dataset.filter === type) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+        
+        // Filter cards
+        cards.forEach(card => {
+            const cardType = card.dataset.type;
+            if (type === 'all' || cardType === type) {
+                card.closest('.col-lg-4').classList.remove('d-none');
+            } else {
+                card.closest('.col-lg-4').classList.add('d-none');
+            }
+        });
+    }
+    
+    // Rating input
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.rating-star');
+        const ratingValue = document.getElementById('ratingValue');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.dataset.rating;
+                ratingValue.value = rating;
+                
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('bi-star');
+                        s.classList.add('bi-star-fill', 'text-primary');
+                    } else {
+                        s.classList.remove('bi-star-fill', 'text-primary');
+                        s.classList.add('bi-star');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                const rating = this.dataset.rating;
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.add('text-warning');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseleave', function() {
+                stars.forEach(s => {
+                    if (!s.classList.contains('bi-star-fill')) {
+                        s.classList.remove('text-warning');
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[*pagetitle]] - [[++site_name]]</title>
+    <meta name="description" content="[[*description]]">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="[[++assets_url]]css/custom.css" rel="stylesheet">
+</head>
+<body>
+    [[$header]]
+
+    <!-- Hero Section -->
+    <section class="py-5 gradient-primary-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary text-white fs-6 mb-3 px-4 py-2">
+                        <i class="bi bi-stars me-2"></i>Выгодные предложения
+                    </span>
+                    <h1 class="display-4 fw-bold mb-4">Акции и спецпредложения</h1>
+                    <p class="lead text-muted mb-4">
+                        Строим дома и бани с выгодой до 15%. Успейте воспользоваться лучшими предложениями сезона!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                [[!pdoResources?
+                    &parents=`[[*id]]`
+                    &tpl=`promotionCard`
+                    &limit=`12`
+                    &sortby=`menuindex`
+                    &sortdir=`ASC`
+                    &includeTVs=`promo_discount,promo_valid_until,promo_conditions,promo_is_hot`
+                ]]
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert Subscription Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card border-success border-2 shadow-lg">
+                        <div class="card-body p-4 p-lg-5 text-center">
+                            <i class="bi bi-bell display-3 text-success mb-4"></i>
+                            <h3 class="h2 mb-3">Узнавайте об акциях первыми</h3>
+                            <p class="lead text-muted mb-4">
+                                Подпишитесь на уведомления и не пропускайте выгодные предложения
+                            </p>
+                            
+                            <div class="row g-4 mb-5 justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="rounded-circle gradient-primary d-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                                            <i class="bi bi-envelope text-white fs-3"></i>
+                                        </div>
+                                        <p class="fw-semibold mb-1">Email-рассылка</p>
+                                        <p class="text-muted small">Раз в неделю</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="rounded-circle gradient-secondary d-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                                            <i class="bi bi-chat-dots text-white fs-3"></i>
+                                        </div>
+                                        <p class="fw-semibold mb-1">Telegram-канал</p>
+                                        <p class="text-muted small">Оперативно</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="rounded-circle bg-primary bg-opacity-25 d-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                                            <i class="bi bi-phone text-primary fs-3"></i>
+                                        </div>
+                                        <p class="fw-semibold mb-1">SMS-уведомления</p>
+                                        <p class="text-muted small">Важные акции</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <form id="promoSubscribeForm" class="row g-2 justify-content-center">
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Ваше имя" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="tel" class="form-control form-control-lg" placeholder="Телефон" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success btn-lg w-100 gradient-secondary">
+                                        <i class="bi bi-bell"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="h1 text-center mb-5">Часто задаваемые вопросы</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item border-2 mb-3">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    <i class="bi bi-question-circle text-primary me-2"></i>
+                                    Можно ли совмещать несколько акций?
+                                </button>
+                            </h3>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Большинство акций не суммируются между собой, но вы можете выбрать наиболее выгодное предложение. Уточните условия у нашего менеджера.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-2 mb-3">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    <i class="bi bi-question-circle text-primary me-2"></i>
+                                    Как долго действуют акции?
+                                </button>
+                            </h3>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Срок действия каждой акции указан в карточке предложения. Мы регулярно обновляем акции, поэтому рекомендуем подписаться на уведомления.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-2 mb-3">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    <i class="bi bi-question-circle text-primary me-2"></i>
+                                    Как воспользоваться акцией?
+                                </button>
+                            </h3>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Оставьте заявку через форму на сайте или позвоните нам. Сообщите менеджеру название акции, и мы применим скидку к вашему заказу.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-2">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    <i class="bi bi-question-circle text-primary me-2"></i>
+                                    Действуют ли акции на индивидуальные проекты?
+                                </button>
+                            </h3>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Да, большинство акций распространяются и на индивидуальные проекты. Условия уточняйте у менеджера при оформлении заказа.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    [[$footer]]
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="[[++assets_url]]js/custom.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Promo subscription form
+        document.getElementById('promoSubscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Вы подписались на уведомления об акциях.');
+            this.reset();
+        });
+    });
+    </script>
+</body>
+</html>

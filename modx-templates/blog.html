@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[*pagetitle]] - [[++site_name]]</title>
+    <meta name="description" content="[[*description]]">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="[[++assets_url]]css/custom.css" rel="stylesheet">
+</head>
+<body>
+    [[$header]]
+
+    <!-- Hero Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Блог о строительстве</h1>
+                    <p class="lead text-muted mb-4">
+                        Полезные статьи, советы экспертов и актуальные новости из мира деревянного домостроения
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Search and Filter -->
+            <div class="row mb-4">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" id="blogSearch" placeholder="Поиск статей...">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex gap-2 flex-wrap justify-content-lg-end" id="categoryFilters">
+                        <button class="btn btn-primary active filter-btn" data-category="all">Все</button>
+                        <button class="btn btn-outline-primary filter-btn" data-category="материалы">Материалы</button>
+                        <button class="btn btn-outline-primary filter-btn" data-category="советы">Советы</button>
+                        <button class="btn btn-outline-primary filter-btn" data-category="подготовка">Подготовка</button>
+                        <button class="btn btn-outline-primary filter-btn" data-category="тренды">Тренды</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <div class="row g-4" id="blogGrid">
+                [[!pdoResources?
+                    &parents=`[[*id]]`
+                    &tpl=`blogCard`
+                    &limit=`12`
+                    &sortby=`publishedon`
+                    &sortdir=`DESC`
+                    &includeTVs=`blog_category,blog_author,blog_read_time,blog_excerpt`
+                ]]
+            </div>
+
+            <!-- No Results Message -->
+            <div class="text-center py-5 d-none" id="noResults">
+                <i class="bi bi-file-x display-1 text-muted mb-3"></i>
+                <p class="lead text-muted">Статьи не найдены</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card border-primary border-2 shadow-lg">
+                        <div class="card-body p-4 p-lg-5 text-center">
+                            <i class="bi bi-envelope display-3 text-primary mb-4"></i>
+                            <h3 class="h2 mb-3">Подпишитесь на рассылку</h3>
+                            <p class="lead text-muted mb-4">
+                                Получайте свежие статьи и эксклюзивные материалы на почту
+                            </p>
+                            <form id="newsletterForm" class="row g-2">
+                                <div class="col-md-8">
+                                    <input type="email" class="form-control form-control-lg" placeholder="Ваш email" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 gradient-primary">
+                                        Подписаться
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    [[$footer]]
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="[[++assets_url]]js/custom.js"></script>
+    
+    <script>
+    // Blog filtering and search
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('blogSearch');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+        const noResults = document.getElementById('noResults');
+        
+        let currentCategory = 'all';
+        let currentSearch = '';
+        
+        // Category filter
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'btn-primary');
+                    b.classList.add('btn-outline-primary');
+                });
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('active', 'btn-primary');
+                
+                currentCategory = this.dataset.category;
+                filterPosts();
+            });
+        });
+        
+        // Search
+        searchInput.addEventListener('input', function() {
+            currentSearch = this.value.toLowerCase();
+            filterPosts();
+        });
+        
+        function filterPosts() {
+            let visibleCount = 0;
+            
+            blogCards.forEach(card => {
+                const category = card.dataset.category.toLowerCase();
+                const title = card.dataset.title.toLowerCase();
+                const excerpt = card.dataset.excerpt.toLowerCase();
+                
+                const matchesCategory = currentCategory === 'all' || category === currentCategory;
+                const matchesSearch = currentSearch === '' || 
+                                    title.includes(currentSearch) || 
+                                    excerpt.includes(currentSearch);
+                
+                if (matchesCategory && matchesSearch) {
+                    card.closest('.col-lg-4').classList.remove('d-none');
+                    visibleCount++;
+                } else {
+                    card.closest('.col-lg-4').classList.add('d-none');
+                }
+            });
+            
+            if (visibleCount === 0) {
+                noResults.classList.remove('d-none');
+            } else {
+                noResults.classList.add('d-none');
+            }
+        }
+        
+        // Newsletter form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за подписку! Проверьте почту.');
+            this.reset();
+        });
+    });
+    </script>
+</body>
+</html>

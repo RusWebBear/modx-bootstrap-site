@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -81,7 +81,6 @@ const blogPosts: BlogPost[] = [
 ];
 
 const Blog = () => {
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -96,27 +95,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/80 border-b border-border">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
-                <Icon name="ArrowLeft" size={24} />
-              </Button>
-              <div className="flex items-center gap-2">
-                <Icon name="Home" size={32} className="text-primary" />
-                <h1 className="text-2xl font-bold bg-clip-text text-transparent gradient-primary">
-                  Дома и Бани
-                </h1>
-              </div>
-            </div>
-            <Button className="gradient-primary hover-scale">
-              <Icon name="Phone" size={16} className="mr-2" />
-              Заказать звонок
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">

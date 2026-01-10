@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
+import Header from '@/components/Header';
 
 interface Project {
   id: number;
@@ -97,28 +98,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/80 border-b border-border">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Icon name="Home" size={32} className="text-primary" />
-              <h1 className="text-2xl font-bold bg-clip-text text-transparent gradient-primary">
-                Дома и Бани
-              </h1>
-            </div>
-            <nav className="hidden md:flex gap-6">
-              <a href="#projects" className="text-sm font-medium hover:text-primary transition-colors">Проекты</a>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/blog')} className="text-sm font-medium">Блог</Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/promotions')} className="text-sm font-medium">Акции</Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/reviews')} className="text-sm font-medium">Отзывы</Button>
-            </nav>
-            <Button className="gradient-primary hover-scale">
-              <Icon name="Phone" size={16} className="mr-2" />
-              Заказать звонок
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 gradient-primary opacity-10"></div>

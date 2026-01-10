@@ -108,9 +108,9 @@ const Index = () => {
             </div>
             <nav className="hidden md:flex gap-6">
               <a href="#projects" className="text-sm font-medium hover:text-primary transition-colors">Проекты</a>
-              <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">О компании</a>
-              <a href="#calculator" className="text-sm font-medium hover:text-primary transition-colors">Калькулятор</a>
-              <a href="#contacts" className="text-sm font-medium hover:text-primary transition-colors">Контакты</a>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/blog')} className="text-sm font-medium">Блог</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/promotions')} className="text-sm font-medium">Акции</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/reviews')} className="text-sm font-medium">Отзывы</Button>
             </nav>
             <Button className="gradient-primary hover-scale">
               <Icon name="Phone" size={16} className="mr-2" />
@@ -414,6 +414,88 @@ const Index = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Этапы строительства</h2>
+            <p className="text-lg text-muted-foreground">От заявки до сдачи объекта под ключ</p>
+          </div>
+          <div className="max-w-4xl mx-auto space-y-6">
+            {[
+              {
+                step: 1,
+                title: 'Заявка и консультация',
+                desc: 'Вы оставляете заявку, наш специалист связывается с вами для обсуждения деталей проекта',
+                icon: 'Phone',
+                time: '1 день'
+              },
+              {
+                step: 2,
+                title: 'Выбор проекта и расчёт',
+                desc: 'Выбираем готовый проект или разрабатываем индивидуальный. Составляем смету и договор',
+                icon: 'FileText',
+                time: '2-3 дня'
+              },
+              {
+                step: 3,
+                title: 'Подготовка участка',
+                desc: 'Выезжаем на участок, делаем разметку, готовим площадку под фундамент',
+                icon: 'MapPin',
+                time: '1-2 недели'
+              },
+              {
+                step: 4,
+                title: 'Строительство фундамента',
+                desc: 'Заливаем фундамент согласно проекту. Ждём полного застывания бетона',
+                icon: 'Layers',
+                time: '2-3 недели'
+              },
+              {
+                step: 5,
+                title: 'Возведение стен и кровли',
+                desc: 'Собираем коробку дома из бруса, устанавливаем стропильную систему и кровлю',
+                icon: 'Home',
+                time: '3-4 недели'
+              },
+              {
+                step: 6,
+                title: 'Внутренние работы',
+                desc: 'Проводим коммуникации, устанавливаем окна и двери, делаем внутреннюю отделку',
+                icon: 'Wrench',
+                time: '4-6 недель'
+              },
+              {
+                step: 7,
+                title: 'Сдача объекта',
+                desc: 'Финальная приёмка, подписание акта выполненных работ. Вы получаете ключи от дома!',
+                icon: 'CheckCircle',
+                time: '1 день'
+              }
+            ].map((stage, idx) => (
+              <div key={idx} className="flex gap-6 items-start group">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon name={stage.icon as any} size={28} className="text-white" />
+                  </div>
+                </div>
+                <Card className="flex-1 border-2 hover:border-primary transition-all">
+                  <CardHeader>
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge className="gradient-secondary">Этап {stage.step}</Badge>
+                      <Badge variant="outline" className="text-xs">{stage.time}</Badge>
+                    </div>
+                    <CardTitle className="text-xl">{stage.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{stage.desc}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </section>

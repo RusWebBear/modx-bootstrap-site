@@ -1,0 +1,46 @@
+<!-- Review Card Chunk -->
+<div class="col-md-6 col-lg-4">
+    <div class="card h-100 border-2 hover-card">
+        [[+tv.review_images:notempty=`
+        <div class="position-relative overflow-hidden" style="height: 200px;">
+            <img src="[[+tv.review_images]]" class="card-img-top h-100 object-fit-cover" alt="[[+tv.review_project]]">
+        </div>
+        `]]
+        <div class="card-body">
+            <div class="d-flex align-items-start gap-3 mb-3">
+                <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; flex-shrink: 0;">
+                    <i class="bi bi-person text-primary fs-5"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0 fw-bold">[[+tv.review_name]]</h6>
+                        [[+tv.review_verified:eq=`1`:then=`
+                        <span class="badge bg-success bg-opacity-10 text-success border border-success">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Проверен
+                        </span>
+                        `]]
+                    </div>
+                    <p class="text-muted small mb-0">[[+tv.review_location]]</p>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex gap-1">
+                    [[+tv.review_rating:repeat=`<i class="bi bi-star-fill text-warning"></i>`]]
+                </div>
+                <small class="text-muted">[[+tv.review_date:date=`%d.%m.%Y`]]</small>
+            </div>
+            
+            <span class="badge bg-light text-dark border mb-3">[[+tv.review_project]]</span>
+            
+            <p class="card-text text-muted">[[+content:ellipsis=`150`]]</p>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+            <a href="[[~20]]#review-[[+id]]" class="btn btn-sm btn-outline-primary w-100">
+                Читать полностью
+                <i class="bi bi-chevron-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>

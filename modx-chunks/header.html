@@ -1,0 +1,39 @@
+<!-- Header Chunk -->
+<header class="sticky-top bg-white border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="[[~1]]">
+                <i class="bi bi-house-heart text-primary fs-2 me-2"></i>
+                <span class="fw-bold fs-4 gradient-text">Дома и Бани</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link [[+1:is=`[[*id]]`:then=`active`]]" href="[[~1]]">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[+5:is=`[[*parent]]`:or=`[[*id]]`:then=`active`]]" href="[[~5]]">Проекты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[+10:is=`[[*parent]]`:or=`[[*id]]`:then=`active`]]" href="[[~10]]">Блог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[+15:is=`[[*id]]`:then=`active`]]" href="[[~15]]">Акции</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[+20:is=`[[*id]]`:then=`active`]]" href="[[~20]]">Отзывы</a>
+                    </li>
+                </ul>
+                <a href="tel:+79991234567" class="btn btn-primary gradient-primary">
+                    <i class="bi bi-telephone me-2"></i>
+                    Заказать звонок
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

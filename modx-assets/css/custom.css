@@ -1,0 +1,288 @@
+/* Custom Styles for MODX + Bootstrap 5 */
+
+/* Fonts */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Color Variables */
+:root {
+  --primary-orange: #f97316;
+  --primary-light: #fec6a1;
+  --secondary-green: #22c55e;
+  --secondary-light: #10b981;
+  --dark: #1a1f2c;
+}
+
+/* Gradient Classes */
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-orange) 0%,
+    var(--primary-light) 100%
+  );
+  border: none;
+  color: white !important;
+}
+
+.gradient-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.gradient-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-green) 0%,
+    var(--secondary-light) 100%
+  );
+  border: none;
+  color: white !important;
+}
+
+.gradient-secondary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--primary-orange) 0%,
+    var(--primary-light) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(254, 198, 161, 0.1) 100%
+  );
+  opacity: 0.3;
+}
+
+.gradient-secondary-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.05) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
+}
+
+/* Icon Box */
+.icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box i {
+  font-size: 2rem;
+}
+
+/* Hover Effects */
+.hover-card {
+  transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-orange) !important;
+}
+
+.hover-zoom {
+  transition: transform 0.5s ease;
+}
+
+.hover-card:hover .hover-zoom {
+  transform: scale(1.1);
+}
+
+.hover-primary:hover {
+  color: var(--primary-orange) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+  min-height: 70vh;
+}
+
+/* Navbar Active State */
+.navbar-nav .nav-link.active {
+  color: var(--primary-orange) !important;
+  font-weight: 600;
+}
+
+/* Project Type Buttons */
+.project-type-btn {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-type-btn:hover,
+.project-type-btn.active {
+  background-color: var(--secondary-green) !important;
+  color: white !important;
+  border-color: var(--secondary-green) !important;
+}
+
+/* Form Styles */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.25);
+}
+
+/* Custom Range */
+.form-range::-webkit-slider-thumb {
+  background-color: var(--primary-orange);
+}
+
+.form-range::-moz-range-thumb {
+  background-color: var(--primary-orange);
+}
+
+/* Badge Styles */
+.badge.gradient-primary {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Button Styles */
+.btn {
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-lg {
+  padding: 0.75rem 2rem;
+}
+
+/* Star Rating */
+.bi-star-fill {
+  color: #fbbf24;
+}
+
+/* Sticky Header */
+header.sticky-top {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Number Format */
+.price-format::after {
+  content: " ₽";
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .display-1 {
+    font-size: 3rem;
+  }
+
+  .display-4 {
+    font-size: 2rem;
+  }
+}
+
+/* Object Fit Polyfill for older browsers */
+.object-fit-cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Construction Steps Timeline */
+.step-timeline {
+  position: relative;
+  padding-left: 80px;
+}
+
+.step-timeline::before {
+  content: "";
+  position: absolute;
+  left: 28px;
+  top: 60px;
+  bottom: -20px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-orange),
+    var(--primary-light)
+  );
+}
+
+.step-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  z-index: 1;
+}
+
+/* Loading State */
+.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .btn,
+  footer {
+    display: none !important;
+  }
+}

@@ -1,0 +1,48 @@
+<!-- Project Card Chunk -->
+<div class="col-md-6 col-lg-4">
+    <div class="card h-100 project-card border-2 hover-card" 
+         data-type="[[+tv.project_type]]" 
+         data-area="[[+tv.project_area]]" 
+         data-price="[[+tv.project_price]]">
+        <div class="position-relative overflow-hidden" style="height: 250px;">
+            <img src="[[+tv.project_image]]" class="card-img-top h-100 object-fit-cover hover-zoom" alt="[[+pagetitle]]">
+            <span class="badge gradient-primary position-absolute top-0 end-0 m-3">
+                [[+tv.project_type:eq=`house`:then=`Дом`:else=`Баня`]]
+            </span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">[[+pagetitle]]</h5>
+            <div class="d-flex gap-3 text-muted mb-3">
+                <span>
+                    <i class="bi bi-rulers me-1"></i>
+                    [[+tv.project_area]] м²
+                </span>
+                [[+tv.project_rooms:notempty=`
+                <span>
+                    <i class="bi bi-door-open me-1"></i>
+                    [[+tv.project_rooms]] комн.
+                </span>
+                `]]
+            </div>
+            <div class="mb-3">
+                [[+tv.project_features:split=`\n`:loop=`
+                <span class="badge bg-secondary me-1 mb-1">[[+value]]</span>
+                `]]
+            </div>
+            <div class="h4 text-primary fw-bold mb-3">
+                [[+tv.project_price:number_format]] ₽
+            </div>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+            <div class="d-flex gap-2">
+                <a href="[[~[[+id]]]]" class="btn btn-primary gradient-primary flex-grow-1">
+                    <i class="bi bi-eye me-2"></i>
+                    Подробнее
+                </a>
+                <button class="btn btn-outline-primary" onclick="addToFavorites([[+id]])">
+                    <i class="bi bi-heart"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

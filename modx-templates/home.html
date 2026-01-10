@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[*pagetitle]] | Дома и Бани из бруса под ключ</title>
+    <meta name="description" content="[[*description:default=`Строительство деревянных домов и бань из бруса под ключ. Более 12 лет опыта. Гарантия качества 5 лет.`]]">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="[[++assets_url]]css/custom.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+[[$header]]
+
+<!-- Hero Section -->
+<section class="hero-section py-5 position-relative overflow-hidden">
+    <div class="gradient-overlay"></div>
+    <div class="container py-5 position-relative" style="z-index: 10;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center animate-fade-in">
+                <h1 class="display-1 fw-bold mb-4">
+                    Дома и бани из бруса
+                    <span class="d-block text-primary mt-2">под ключ</span>
+                </h1>
+                <p class="lead text-muted mb-5 fs-4">
+                    Современные проекты с использованием экологичных материалов. Гарантия качества и быстрые сроки строительства.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center mb-5">
+                    <a href="[[~5]]" class="btn btn-primary btn-lg gradient-primary px-4">
+                        <i class="bi bi-house me-2"></i>
+                        Выбрать дом
+                    </a>
+                    <a href="[[~5]]?type=banya" class="btn btn-outline-primary btn-lg px-4">
+                        <i class="bi bi-droplet me-2"></i>
+                        Выбрать баню
+                    </a>
+                    <a href="#calculator" class="btn btn-success btn-lg gradient-secondary px-4">
+                        <i class="bi bi-pencil me-2"></i>
+                        Свой проект
+                    </a>
+                </div>
+                <div class="row g-4 justify-content-center mt-5">
+                    <div class="col-auto text-center">
+                        <div class="display-4 fw-bold text-primary">34</div>
+                        <div class="text-muted">Построено объектов</div>
+                    </div>
+                    <div class="col-auto text-center">
+                        <div class="display-4 fw-bold text-success">12</div>
+                        <div class="text-muted">Лет опыта</div>
+                    </div>
+                    <div class="col-auto text-center">
+                        <div class="display-4 fw-bold text-warning">100%</div>
+                        <div class="text-muted">Довольных клиентов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold mb-3">Наши проекты</h2>
+            <p class="lead text-muted">Выберите готовый проект или закажите индивидуальный</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="card border-2 mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-filter me-2"></i>
+                            Тип объекта
+                        </label>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="typeFilter" id="typeAll" checked>
+                            <label class="btn btn-outline-primary" for="typeAll">Все</label>
+                            
+                            <input type="radio" class="btn-check" name="typeFilter" id="typeHouse">
+                            <label class="btn btn-outline-primary" for="typeHouse">Дома</label>
+                            
+                            <input type="radio" class="btn-check" name="typeFilter" id="typeBanya">
+                            <label class="btn btn-outline-primary" for="typeBanya">Бани</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-rulers me-2"></i>
+                            Площадь: <span id="areaValue">30 - 200</span> м²
+                        </label>
+                        <input type="range" class="form-range" min="30" max="200" step="5" id="areaRange">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-wallet me-2"></i>
+                            Цена: <span id="priceValue">500 000 - 5 000 000</span> ₽
+                        </label>
+                        <input type="range" class="form-range" min="500000" max="5000000" step="100000" id="priceRange">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="row g-4" id="projectsGrid">
+            [[!pdoResources?
+                &parents=`5`
+                &tpl=`projectCard`
+                &limit=`6`
+                &includeTVs=`project_area,project_price,project_type,project_rooms,project_features,project_image`
+                &sortby=`publishedon`
+                &sortdir=`DESC`
+            ]]
+        </div>
+    </div>
+</section>
+
+<!-- Calculator Section -->
+<section id="calculator" class="py-5 position-relative overflow-hidden">
+    <div class="gradient-secondary-overlay"></div>
+    <div class="container position-relative" style="z-index: 10;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-success border-2 shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-calculator text-success" style="font-size: 3rem;"></i>
+                            <h2 class="h1 fw-bold mt-3">Калькулятор стоимости</h2>
+                            <p class="text-muted fs-5">Узнайте примерную стоимость строительства за 1 минуту</p>
+                        </div>
+                        
+                        [[!FormIt?
+                            &hooks=`email,FormItSaveForm`
+                            &emailTo=`info@domabani.ru`
+                            &emailSubject=`Новая заявка с калькулятора`
+                            &validate=`name:required,phone:required,area:required`
+                            &validationErrorMessage=`Пожалуйста, заполните все обязательные поля`
+                            &successMessage=`Спасибо! Мы свяжемся с вами в ближайшее время.`
+                        ]]
+                        
+                        <form method="post" action="[[~[[*id]]]]">
+                            <input type="hidden" name="nospam" value="">
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-outline-success btn-lg w-100 h-100 d-flex flex-column align-items-center justify-content-center py-4 project-type-btn" data-type="house">
+                                        <i class="bi bi-house" style="font-size: 2rem;"></i>
+                                        <span class="mt-2">Дом</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-outline-success btn-lg w-100 h-100 d-flex flex-column align-items-center justify-content-center py-4 project-type-btn" data-type="banya">
+                                        <i class="bi bi-droplet" style="font-size: 2rem;"></i>
+                                        <span class="mt-2">Баня</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="project_type" id="projectType" value="">
+                            
+                            <div class="mb-3">
+                                <label for="area" class="form-label">Желаемая площадь</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="area" name="area" placeholder="Например, 120" required>
+                                    <span class="input-group-text">м²</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="rooms" class="form-label">Количество комнат</label>
+                                <input type="number" class="form-control" id="rooms" name="rooms" placeholder="Например, 4">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Ваше имя</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Иван Иванов" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success btn-lg w-100 gradient-secondary">
+                                <i class="bi bi-send me-2"></i>
+                                Получить расчёт
+                            </button>
+                        </form>
+                        [[+error.message:notempty=`<div class="alert alert-danger mt-3">[[+error.message]]</div>`]]
+                        [[+success.message:notempty=`<div class="alert alert-success mt-3">[[+success.message]]</div>`]]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Advantages Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold mb-3">Преимущества строительства из бруса</h2>
+            <p class="lead text-muted">Почему деревянный брус — лучший выбор для вашего дома</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-2 hover-card">
+                    <div class="card-body">
+                        <div class="icon-box gradient-primary mx-auto mb-3">
+                            <i class="bi bi-tree text-white"></i>
+                        </div>
+                        <h5 class="card-title">Экологичность</h5>
+                        <p class="card-text text-muted">Натуральные материалы без химии. Дерево "дышит" и создаёт здоровый микроклимат</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-2 hover-card">
+                    <div class="card-body">
+                        <div class="icon-box gradient-primary mx-auto mb-3">
+                            <i class="bi bi-thermometer-half text-white"></i>
+                        </div>
+                        <h5 class="card-title">Теплоизоляция</h5>
+                        <p class="card-text text-muted">Брус держит тепло в 3 раза лучше кирпича. Экономия на отоплении до 40%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-2 hover-card">
+                    <div class="card-body">
+                        <div class="icon-box gradient-primary mx-auto mb-3">
+                            <i class="bi bi-shield-check text-white"></i>
+                        </div>
+                        <h5 class="card-title">Долговечность</h5>
+                        <p class="card-text text-muted">При правильной обработке служит более 50 лет без потери качества</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center border-2 hover-card">
+                    <div class="card-body">
+                        <div class="icon-box gradient-primary mx-auto mb-3">
+                            <i class="bi bi-clock text-white"></i>
+                        </div>
+                        <h5 class="card-title">Скорость</h5>
+                        <p class="card-text text-muted">Строительство за 2-3 месяца. Можно заселяться сразу после завершения</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Us Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold mb-3">Почему выбирают нас</h2>
+            <p class="lead text-muted">Более 12 лет строим дома мечты для наших клиентов</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-2 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box gradient-secondary mx-auto mb-4">
+                            <i class="bi bi-award text-white"></i>
+                        </div>
+                        <h3 class="h4 mb-3">12+ лет опыта</h3>
+                        <p class="text-muted">Построили более 300 домов и бань по всей России. Знаем все тонкости деревянного строительства.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-2 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box gradient-secondary mx-auto mb-4">
+                            <i class="bi bi-check-circle text-white"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Гарантия качества</h3>
+                        <p class="text-muted">5 лет гарантии на все работы. Используем только сертифицированные материалы премиум класса.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-2 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box gradient-secondary mx-auto mb-4">
+                            <i class="bi bi-calendar-check text-white"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Соблюдаем сроки</h3>
+                        <p class="text-muted">Чёткий график работ с поэтапной оплатой. Построим дом в срок или вернём деньги по договору.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Construction Steps Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold mb-3">Этапы строительства</h2>
+            <p class="lead text-muted">От заявки до сдачи объекта под ключ</p>
+        </div>
+        <div class="row g-4">
+            [[$constructionSteps]]
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold mb-3">Отзывы наших клиентов</h2>
+            <p class="lead text-muted">Что говорят о нас те, кто уже построил свой дом</p>
+        </div>
+        <div class="row g-4">
+            [[!pdoResources?
+                &parents=`20`
+                &tpl=`reviewCard`
+                &limit=`3`
+                &includeTVs=`review_name,review_location,review_rating,review_project,review_date`
+                &sortby=`publishedon`
+                &sortdir=`DESC`
+            ]]
+        </div>
+        <div class="text-center mt-4">
+            <a href="[[~20]]" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-chat-square-text me-2"></i>
+                Все отзывы
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+[[$footer]]
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="[[++assets_url]]js/custom.js"></script>
+</body>
+</html>

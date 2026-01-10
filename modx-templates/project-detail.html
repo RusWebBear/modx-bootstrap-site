@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[*pagetitle]] | Дома и Бани</title>
+    <meta name="description" content="[[*description]]">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="[[++assets_url]]css/custom.css" rel="stylesheet">
+</head>
+<body>
+
+[[$header]]
+
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="[[~1]]">Главная</a></li>
+            <li class="breadcrumb-item"><a href="[[~5]]">Проекты</a></li>
+            <li class="breadcrumb-item active">[[*pagetitle]]</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4 mb-5">
+        <!-- Gallery -->
+        <div class="col-lg-6">
+            <div class="mb-3">
+                <img src="[[*tv.project_image]]" class="img-fluid rounded shadow-lg w-100" style="height: 500px; object-fit: cover;" alt="[[*pagetitle]]" onclick="openLightbox(this.src, '[[*pagetitle]]')">
+            </div>
+            [[*tv.project_gallery:migxLoopCollection=`
+            <div class="row g-2">
+                <div class="col-6">
+                    <img src="[[+image]]" class="img-fluid rounded hover-card" style="height: 150px; width: 100%; object-fit: cover; cursor: pointer;" onclick="openLightbox(this.src, '[[*pagetitle]]')">
+                </div>
+            </div>
+            `]]
+        </div>
+
+        <!-- Info -->
+        <div class="col-lg-6">
+            <span class="badge gradient-primary mb-3">[[*tv.project_type:eq=`house`:then=`Дом`:else=`Баня`]]</span>
+            <h1 class="display-4 fw-bold mb-3">[[*pagetitle]]</h1>
+            <p class="lead text-muted mb-4">[[*introtext]]</p>
+            <div class="display-5 fw-bold text-primary mb-4">[[*tv.project_price:number_format]] ₽</div>
+
+            <hr class="my-4">
+
+            <div class="row g-3 mb-4">
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-box gradient-primary">
+                            <i class="bi bi-rulers text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Площадь</div>
+                            <div class="fw-bold fs-5">[[*tv.project_area]] м²</div>
+                        </div>
+                    </div>
+                </div>
+                [[*tv.project_rooms:notempty=`
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-box gradient-secondary">
+                            <i class="bi bi-door-open text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Комнат</div>
+                            <div class="fw-bold fs-5">[[*tv.project_rooms]]</div>
+                        </div>
+                    </div>
+                </div>
+                `]]
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-box bg-warning bg-opacity-25">
+                            <i class="bi bi-layers text-warning"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Этажей</div>
+                            <div class="fw-bold fs-5">[[*tv.project_specs_floors]]</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-box bg-info bg-opacity-25">
+                            <i class="bi bi-clock text-info"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Срок</div>
+                            <div class="fw-bold fs-5">[[*tv.project_specs_buildtime]]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="mb-4">
+                <h6 class="fw-bold mb-3">Особенности проекта</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    [[*tv.project_features:split=`\n`:loop=`
+                    <span class="badge bg-secondary py-2 px-3">[[+value]]</span>
+                    `]]
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-lg gradient-primary flex-grow-1" data-bs-toggle="modal" data-bs-target="#orderModal">
+                    <i class="bi bi-cart-check me-2"></i>
+                    Заказать проект
+                </button>
+                <button class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-download"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#specs">Характеристики</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#description">Описание</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#materials">Материалы</button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="specs">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Технические характеристики</h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-layers text-primary fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Этажей</div>
+                                    <div class="text-muted">[[*tv.project_specs_floors]]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-bricks text-primary fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Материал стен</div>
+                                    <div class="text-muted">[[*tv.project_specs_walls]]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-umbrella text-primary fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Кровля</div>
+                                    <div class="text-muted">[[*tv.project_specs_roof]]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-house-fill text-primary fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Фундамент</div>
+                                    <div class="text-muted">[[*tv.project_specs_foundation]]</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="description">
+            <div class="card">
+                <div class="card-body">
+                    [[*content]]
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="materials">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Используемые материалы</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center gap-3 p-3 border rounded">
+                                <div class="icon-box bg-primary bg-opacity-10">
+                                    <i class="bi bi-bricks text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold">Брус</div>
+                                    <div class="text-muted small">[[*tv.project_specs_walls]]</div>
+                                </div>
+                                <span class="badge gradient-primary">Премиум</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center gap-3 p-3 border rounded">
+                                <div class="icon-box bg-success bg-opacity-10">
+                                    <i class="bi bi-umbrella text-success"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold">Кровля</div>
+                                    <div class="text-muted small">[[*tv.project_specs_roof]]</div>
+                                </div>
+                                <span class="badge gradient-secondary">Качество</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Заказать проект "[[*pagetitle]]"</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                [[!FormIt? &hooks=`email` &emailTo=`info@domabani.ru` &emailSubject=`Заказ проекта: [[*pagetitle]]`]]
+                <form method="post">
+                    <input type="hidden" name="project" value="[[*pagetitle]]">
+                    <div class="mb-3">
+                        <label class="form-label">Ваше имя</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телефон</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Комментарий</label>
+                        <textarea name="comment" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary gradient-primary w-100">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+[[$footer]]
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="[[++assets_url]]js/custom.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -78,6 +79,7 @@ const projects: Project[] = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [priceRange, setPriceRange] = useState<number[]>([500000, 5000000]);
   const [areaRange, setAreaRange] = useState<number[]>([30, 200]);
   const [selectedType, setSelectedType] = useState<'all' | 'house' | 'banya'>('all');
@@ -257,7 +259,7 @@ const Index = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="gap-2">
-                  <Button className="flex-1 gradient-primary">
+                  <Button className="flex-1 gradient-primary" onClick={() => navigate(`/project?id=${project.id}`)}>
                     <Icon name="Eye" size={16} className="mr-2" />
                     Подробнее
                   </Button>
